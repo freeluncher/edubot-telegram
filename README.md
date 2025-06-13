@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)](https://www.python.org/)
 [![Telegram Bot](https://img.shields.io/badge/Telegram-Bot-blue?logo=telegram)](https://core.telegram.org/bots)
 [![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-WebScraping-green)](https://www.crummy.com/software/BeautifulSoup/)
-[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/<USERNAME>/<REPO>/scheduler.yml?label=Scheduler&logo=github)](../../actions)
+[![Scheduler](https://img.shields.io/github/actions/workflow/status/freeluncher/edubot-telegram/reminder_notif.yml?label=Scheduler&logo=github)](../../actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 EduBot adalah chatbot Telegram untuk mencari info beasiswa dan mengingatkan deadline tugas.
