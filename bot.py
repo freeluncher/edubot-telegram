@@ -33,8 +33,24 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(pesan, parse_mode='HTML')
 
 async def beasiswa(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    info = edubot.scraper.get_beasiswa_info()
-    await update.message.reply_text(f'<b>Info Beasiswa Terbaru:</b>\n\n{info}', parse_mode='HTML')
+    jumlah = 3
+    keyword = None
+    if context.args:
+        # Cek apakah argumen pertama angka (jumlah)
+        if context.args[0].isdigit():
+            jumlah = int(context.args[0])
+            if jumlah < 1 or jumlah > 20:
+                await update.message.reply_text('Jumlah beasiswa harus antara 1-20.', parse_mode='HTML')
+                return
+            if len(context.args) > 1:
+                keyword = ' '.join(context.args[1:])
+        else:
+            keyword = ' '.join(context.args)
+    info = edubot.scraper.get_beasiswa_info(jumlah=jumlah, keyword=keyword)
+    if keyword:
+        await update.message.reply_text(f'<b>Hasil pencarian beasiswa:</b> <i>{keyword}</i>\n\n{info}', parse_mode='HTML')
+    else:
+        await update.message.reply_text(f'<b>Info Beasiswa Terbaru:</b>\n\n{info}', parse_mode='HTML')
 
 async def reminder_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
