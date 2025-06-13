@@ -9,7 +9,11 @@ def get_beasiswa_info():
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-        items = soup.select('h2.post-title.entry-title a')[:3]
+        # Ambil 3 beasiswa terbaru dari judul dengan selector: h3 > a
+        items = soup.select('h3 > a')[:3]
+        if not items:
+            # Fallback: cari judul dengan selector h2 > a
+            items = soup.select('h2 > a')[:3]
         if not items:
             return 'Maaf, info beasiswa tidak ditemukan.'
         hasil = 'Beasiswa terbaru:\n'
