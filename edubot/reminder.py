@@ -45,3 +45,25 @@ def parse_deadline(text):
         return dt.strftime('%Y-%m-%d')
     except Exception:
         return None
+
+def delete_reminder(user_id, title):
+    reminders = load_reminders(user_id)
+    new_reminders = [r for r in reminders if r['title'].lower() != title.lower()]
+    if len(new_reminders) == len(reminders):
+        return False
+    save_reminders(user_id, new_reminders)
+    return True
+
+def edit_reminder(user_id, old_title, new_title, new_deadline):
+    reminders = load_reminders(user_id)
+    found = False
+    for r in reminders:
+        if r['title'].lower() == old_title.lower():
+            r['title'] = new_title
+            r['deadline'] = new_deadline
+            found = True
+            break
+    if found:
+        save_reminders(user_id, reminders)
+        return True
+    return False
